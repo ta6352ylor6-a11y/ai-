@@ -3,7 +3,7 @@
 //        node scripts/publish.mjs --main --family ai-nav --preset main-hub     (main site at the Pages root)
 // Sub-sites and main previews (main-v02/...) are never overwritten: build a new --version instead.
 // The main site replaces only the root entries it owns, listed in .main-files.json.
-import { appendFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { appendFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 
@@ -25,11 +25,13 @@ if (!existsSync(path.join(sourceDir, "index.html"))) throw new Error(`Nothing bu
 
 const git = (cwd, ...cmd) => execFileSync("git", cmd, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }).trim();
 
-const cloneDir = path.join(projectRoot, ".publish", site.publishRepo.split("/")[1]);
-if (!existsSync(path.join(cloneDir, ".git"))) {
-  mkdirSync(path.dirname(cloneDir), { recursive: true });
-  git(projectRoot, "clone", `https://github.com/${site.publishRepo}.git`, cloneDir);
+const clonePath = path.join(projectRoot, ".publish", site.publishRepo.split("/")[1]);
+if (!existsSync(path.join(clonePath, ".git"))) {
+  mkdirSync(path.dirname(clonePath), { recursive: true });
+  git(projectRoot, "clone", `https://github.com/${site.publishRepo}.git`, clonePath);
 }
+// .publish/<repo> may be a symlink to an existing checkout; cpSync needs the real directory.
+const cloneDir = realpathSync(clonePath);
 // A brand-new Pages repo has no main branch yet.
 if (git(cloneDir, "ls-remote", "--heads", "origin", "main")) {
   git(cloneDir, "fetch", "origin", "main");

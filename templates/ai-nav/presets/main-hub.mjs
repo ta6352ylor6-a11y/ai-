@@ -17,7 +17,7 @@ const categories = [
       t("deepseek", "DeepSeek", "https://chat.deepseek.com/", "国内", "深度求索推出的大模型对话产品，推理与编程能力强。", "DeepSeek 以推理和代码能力见长，支持深度思考模式和联网搜索，中文问答体验好，也提供开放的模型与 API。", ["对话", "推理", "开源模型"], true),
       t("doubao", "豆包", "https://www.doubao.com/", "国内", "字节跳动推出的 AI 助手，覆盖对话、写作、识图和语音。", "豆包提供网页、桌面和手机端，支持写作、翻译、图片理解和语音通话，日常使用门槛低。", ["对话", "语音", "写作"], true),
       t("kimi", "Kimi", "https://www.kimi.com/", "国内", "月之暗面推出的智能助手，擅长长文本阅读与联网搜索。", "Kimi 以长上下文和文件解析著称，适合一次上传多份 PDF、网页或报告后进行总结、对比和提问。", ["对话", "长文本", "搜索"], true),
-      t("tongyi", "通义", "https://www.tongyi.com/", "国内", "阿里巴巴推出的 AI 助手，支持对话、文档解读和音视频总结。", "通义整合了通义千问大模型，可以做问答写作、长文档解读和音视频转写总结，适合办公与学习场景。", ["对话", "文档", "阿里"]),
+      t("qianwen", "千问", "https://www.qianwen.com/", "国内", "阿里巴巴推出的 AI 助手（原通义），支持对话、文档解读和音视频总结。", "千问由原通义升级而来，基于通义千问大模型，可以做问答写作、长文档解读和音视频转写总结，适合办公与学习场景。", ["对话", "文档", "阿里"]),
       t("yiyan", "文心一言", "https://yiyan.baidu.com/", "国内", "百度推出的大模型对话产品，中文知识问答与创作。", "文心一言基于百度文心大模型，覆盖知识问答、文案创作和多模态生成，与百度搜索生态结合紧密。", ["对话", "中文", "百度"]),
       t("yuanbao", "腾讯元宝", "https://yuanbao.tencent.com/", "国内", "腾讯推出的 AI 助手，可联网搜索公众号等内容。", "腾讯元宝支持多模型切换和联网搜索，能引用微信公众号等内容源，适合资讯检索和日常问答。", ["对话", "搜索", "腾讯"]),
       t("chatglm", "智谱清言", "https://chatglm.cn/", "国内", "智谱 AI 推出的对话助手，基于 GLM 系列大模型。", "智谱清言支持对话、写作、数据分析和智能体，背后的 GLM 系列模型也有开源版本，适合开发者和办公用户。", ["对话", "智能体", "GLM"]),
@@ -78,10 +78,10 @@ const categories = [
     summary: "文生视频、图生视频、数字人和视频剪辑工具。",
     guide: ["对比时长上限、清晰度和画面一致性", "数字人注意肖像授权和平台规范", "先用短片段试效果再批量生成"],
     tools: [
-      t("kling", "可灵 AI", "https://klingai.kuaishou.com/", "国内", "快手推出的视频生成大模型，动作自然。", "可灵 AI 支持文生视频和图生视频，在人物动作和物理效果上表现突出，适合短视频创作。", ["文生视频", "图生视频"], true),
+      t("kling", "可灵 AI", "https://klingai.com/", "国内", "快手推出的视频生成大模型，动作自然。", "可灵 AI 支持文生视频和图生视频，在人物动作和物理效果上表现突出，适合短视频创作。", ["文生视频", "图生视频"], true),
       t("hailuo", "海螺 AI", "https://hailuoai.com/", "国内", "MiniMax 推出的视频与对话产品。", "海螺 AI 提供视频生成、语音和对话能力，视频画面表现力强，适合创意短片。", ["文生视频", "MiniMax"]),
       t("vidu", "Vidu", "https://www.vidu.cn/", "国内", "生数科技推出的视频生成模型，支持参考生视频。", "Vidu 支持多主体参考和角色一致性，适合动画短片和人物类视频创作。", ["文生视频", "角色一致"]),
-      t("runway", "Runway", "https://runwayml.com/", "海外", "专业 AI 视频生成与编辑平台。", "Runway 提供视频生成、运动笔刷、抠像等工具，常用于广告和影视前期创作。", ["视频生成", "剪辑"], true),
+      t("runway", "Runway", "https://runway.com/", "海外", "专业 AI 视频生成与编辑平台。", "Runway 提供视频生成、运动笔刷、抠像等工具，常用于广告和影视前期创作。", ["视频生成", "剪辑"], true),
       t("pika", "Pika", "https://pika.art/", "海外", "轻量的 AI 视频生成工具，特效玩法丰富。", "Pika 支持文生视频和多种趣味特效，上手简单，适合社交媒体短视频。", ["文生视频", "特效"]),
       t("luma", "Luma Dream Machine", "https://lumalabs.ai/", "海外", "Luma AI 的视频生成工具，画面真实流畅。", "Dream Machine 可根据文字或图片生成镜头运动自然的视频，适合产品展示和创意片段。", ["文生视频", "3D"]),
       t("heygen", "HeyGen", "https://www.heygen.com/", "海外", "AI 数字人视频平台，支持多语言口型同步。", "HeyGen 可以用数字人播报脚本，并把视频翻译成多种语言同时对口型，适合营销和培训视频。", ["数字人", "翻译配音"]),
@@ -111,11 +111,10 @@ const categories = [
     guide: ["先确认支持的编辑器和语言", "企业代码关注隐私策略和私有部署", "生成代码务必经过测试和代码评审"],
     tools: [
       t("cursor", "Cursor", "https://cursor.com/", "海外", "以 AI 为核心的代码编辑器，支持整库理解。", "Cursor 基于 VS Code，提供代码补全、对话改代码和智能体模式，能理解整个代码库后再修改。", ["AI IDE", "补全", "智能体"], true),
-      t("claude-code", "Claude Code", "https://www.claude.com/product/claude-code", "海外", "Anthropic 的编程智能体，可在终端和 IDE 中完成开发任务。", "Claude Code 能阅读代码库、修改文件、运行命令并提交代码，适合把多步骤开发任务交给 AI 完成。", ["编程智能体", "终端"], true),
+      t("claude-code", "Claude Code", "https://claude.com/product/claude-code", "海外", "Anthropic 的编程智能体，可在终端和 IDE 中完成开发任务。", "Claude Code 能阅读代码库、修改文件、运行命令并提交代码，适合把多步骤开发任务交给 AI 完成。", ["编程智能体", "终端"], true),
       t("github-copilot", "GitHub Copilot", "https://github.com/features/copilot", "海外", "GitHub 的 AI 编程助手，支持主流编辑器。", "GitHub Copilot 提供代码补全、对话和代码评审能力，支持 VS Code、JetBrains 等编辑器。", ["补全", "代码评审"], true),
       t("trae", "Trae", "https://www.trae.cn/", "国内", "字节跳动推出的 AI 原生 IDE。", "Trae 提供中文友好的 AI 对话编程和智能体模式，适合国内开发者快速上手 AI 编程。", ["AI IDE", "中文"]),
       t("lingma", "通义灵码", "https://lingma.aliyun.com/", "国内", "阿里云的智能编码助手，支持多种 IDE。", "通义灵码提供代码补全、单元测试生成和代码解释，支持 VS Code 和 JetBrains，适合企业团队。", ["补全", "IDE 插件"]),
-      t("windsurf", "Windsurf", "https://windsurf.com/", "海外", "带智能体能力的 AI 代码编辑器。", "Windsurf 提供能自主执行多步骤修改的编程智能体，适合中大型项目的重构和功能开发。", ["AI IDE", "智能体"]),
       t("v0", "v0", "https://v0.app/", "海外", "Vercel 推出的 AI 应用与界面生成工具。", "v0 可以用自然语言生成 React 界面和完整 Web 应用，并一键部署到 Vercel。", ["界面生成", "前端"]),
       t("bolt", "Bolt.new", "https://bolt.new/", "海外", "在浏览器中用对话生成并运行全栈应用。", "Bolt.new 在浏览器内搭建开发环境，通过对话生成、运行和部署全栈 Web 应用。", ["应用生成", "全栈"]),
       t("replit", "Replit", "https://replit.com/", "海外", "在线编程平台，内置 AI 智能体搭建应用。", "Replit 提供在线 IDE 和 AI 智能体，可以从一句需求开始生成、托管和发布应用。", ["在线 IDE", "部署"])
@@ -174,7 +173,7 @@ const categories = [
     tools: [
       t("huggingface", "Hugging Face", "https://huggingface.co/", "海外", "全球最大的开源模型与数据集社区。", "Hugging Face 托管大量开源模型、数据集和在线 Demo，是查找和试用开源 AI 模型的首选平台。", ["模型社区", "开源"], true),
       t("modelscope", "魔搭社区", "https://www.modelscope.cn/", "国内", "阿里达摩院发起的中文模型开源社区。", "魔搭社区提供大量中文开源模型和在线推理、训练环境，国内访问速度快。", ["模型社区", "中文"]),
-      t("anthropic-console", "Claude 开发平台", "https://console.anthropic.com/", "海外", "Anthropic 的 API 控制台，接入 Claude 模型。", "在 Claude 开发平台可以创建 API Key、调试提示词并接入 Claude 模型，用于构建自己的 AI 应用。", ["API", "Claude"]),
+      t("anthropic-console", "Claude 开发平台", "https://platform.claude.com/", "海外", "Anthropic 的 API 控制台，接入 Claude 模型。", "在 Claude 开发平台可以创建 API Key、调试提示词并接入 Claude 模型，用于构建自己的 AI 应用。", ["API", "Claude"]),
       t("openai-platform", "OpenAI 开发平台", "https://platform.openai.com/", "海外", "OpenAI 的 API 平台，提供 GPT 等模型接口。", "OpenAI 开发平台提供模型 API、调试工具和用量管理，适合开发者接入 GPT 系列模型。", ["API", "OpenAI"]),
       t("openrouter", "OpenRouter", "https://openrouter.ai/", "海外", "统一接口调用多家大模型的路由平台。", "OpenRouter 用一个 API 调用多家厂商的模型，方便比较价格和效果、切换供应商。", ["API", "多模型"]),
       t("ollama", "Ollama", "https://ollama.com/", "海外", "在本地电脑一键运行开源大模型。", "Ollama 可以用一条命令下载并在本地运行 Llama、Qwen 等开源模型，适合离线使用和隐私敏感场景。", ["本地部署", "开源模型"]),
@@ -201,7 +200,7 @@ const categories = [
     summary: "学习 AI 知识、提示词技巧和大模型课程的资源。",
     guide: ["入门先看官方文档和免费课程", "提示词技巧结合自己的任务练习", "关注模型更新带来的方法变化"],
     tools: [
-      t("anthropic-academy", "Anthropic Academy", "https://www.anthropic.com/learn", "海外", "Anthropic 官方的 Claude 使用与开发课程。", "Anthropic Academy 提供使用 Claude 和构建 AI 应用的官方课程与指南，适合从入门到开发进阶。", ["课程", "官方文档"]),
+      t("anthropic-academy", "Anthropic Academy", "https://academy.claude.com/", "海外", "Anthropic 官方的 Claude 使用与开发课程。", "Anthropic Academy 提供使用 Claude 和构建 AI 应用的官方课程与指南，适合从入门到开发进阶。", ["课程", "官方文档"]),
       t("deeplearning-ai", "DeepLearning.AI", "https://www.deeplearning.ai/", "海外", "吴恩达创办的 AI 课程平台，含大量短课程。", "DeepLearning.AI 提供机器学习、大模型应用和提示工程等课程，其中不少短课程可免费学习。", ["课程", "大模型"]),
       t("learnprompting", "Learn Prompting", "https://learnprompting.org/", "海外", "系统的提示词工程学习指南。", "Learn Prompting 从基础到进阶讲解提示词技巧和案例，适合想系统提升提示词能力的用户。", ["提示词", "教程"]),
       t("kaggle", "Kaggle", "https://www.kaggle.com/", "海外", "数据科学竞赛与学习社区，提供免费算力。", "Kaggle 提供数据集、竞赛、免费 Notebook 算力和入门课程，适合动手学习机器学习。", ["数据科学", "竞赛"])
