@@ -10,7 +10,7 @@
   "analytics": {
     "_note": "填入统计 ID 后重新发布任意一个站即可全站生效（只会更新根目录 analytics.js）",
     "baidu": "",
-    "ga4": "",
+    "ga4": "G-83DKFE85FQ",
     "umami": {
       "src": "",
       "websiteId": ""
