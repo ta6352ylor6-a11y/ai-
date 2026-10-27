@@ -60,6 +60,8 @@ if (isMainRoot) {
 }
 
 if (!existsSync(path.join(cloneDir, ".nojekyll"))) writeFileSync(path.join(cloneDir, ".nojekyll"), "");
+// GitHub Pages reads the custom domain from a root CNAME file.
+if (site.customDomain) writeFileSync(path.join(cloneDir, "CNAME"), `${site.customDomain}\n`);
 writeRootIndexes();
 
 git(cloneDir, "add", "-A");

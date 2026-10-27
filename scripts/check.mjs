@@ -6,7 +6,8 @@ import { fileURLToPath } from "node:url";
 
 import { walkFiles } from "./lib.mjs";
 
-const foreignPages = /https?:\/\/(?!ta6352ylor6-a11y\.github\.io)[a-z0-9-]+\.github\.io/gi;
+// Any github.io link is either another account or this account's old address (the site now lives on a custom domain).
+const foreignPages = /https?:\/\/[a-z0-9-]+\.github\.io/gi;
 
 export function checkSite(dir, baseUrl) {
   const problems = [];

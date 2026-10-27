@@ -1,6 +1,6 @@
 # ai-
 
-ai导航站：手动驱动的静态站生成与发布工厂。一条命令只生成并发布一个站，发布到 `https://ta6352ylor6-a11y.github.io/<slug>/`。
+ai导航站：手动驱动的静态站生成与发布工厂。一条命令只生成并发布一个站，发布到 `https://ai.gotidc.com/<slug>/`（GitHub Pages + 自定义域名）。
 
 ## 目录
 
