@@ -2,6 +2,8 @@
 // Usage: node scripts/publish.mjs --slug ta6352ylor6-a11y-dev-tools --family nav --preset dev-tools
 //        node scripts/publish.mjs --main --family ai-nav --preset main-hub     (main site at the Pages root)
 // Sub-sites and main previews (main-v02/...) are never overwritten: build a new --version instead.
+// --rebase-domain replaces an existing sub-site with the same content rebuilt for a new domain;
+// use it only after changing pagesBase in config/site.json.
 // The main site replaces only the root entries it owns, listed in .main-files.json.
 import { appendFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -55,7 +57,10 @@ if (isMainRoot) {
   if (mainOwned.includes(slug)) throw new Error(`${slug} is a path the main site uses. Pick another --name.`);
   const targetDir = path.join(cloneDir, slug);
   if (existsSync(targetDir)) {
-    throw new Error(`${slug}/ is already published. Build a new version (--version N) instead of overwriting it.`);
+    if (!args["rebase-domain"]) {
+      throw new Error(`${slug}/ is already published. Build a new version (--version N) instead of overwriting it.`);
+    }
+    rmSync(targetDir, { recursive: true, force: true });
   }
   cpSync(sourceDir, targetDir, { recursive: true });
 }
@@ -78,7 +83,7 @@ const url = new URL(slug ? `${slug}/` : "", site.pagesBase).toString();
 const registry = path.join(projectRoot, "SITE-LINK-REGISTRY.md");
 const date = new Date().toISOString().slice(0, 10);
 const label = isMainRoot ? "(主站)" : slug;
-if (isMainRoot || !readFileSync(registry, "utf8").includes(`| ${slug} |`)) {
+if (isMainRoot || args["rebase-domain"] || !readFileSync(registry, "utf8").includes(`| ${slug} |`)) {
   appendFileSync(registry, `| ${date} | ${label} | ${family} | ${preset} | ${url} | 待确认 |\n`);
 }
 
