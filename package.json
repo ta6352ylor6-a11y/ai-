@@ -1,0 +1,15 @@
+{
+  "name": "ai-site-factory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Manually driven static site builder: one site per command, published to GitHub Pages.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "publish-site": "node scripts/publish.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
