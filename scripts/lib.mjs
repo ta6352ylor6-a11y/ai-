@@ -3,7 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const families = ["nav", "tool", "lead", "analysis"];
+export const families = ["ai-nav", "nav", "tool", "lead", "analysis"];
+
+// The main site lives at the Pages root; its versions are previewed at main-v02/, main-v03/ before promotion.
+export const MAIN_DIST = "_main";
 
 export function loadSiteConfig() {
   return JSON.parse(readFileSync(path.join(projectRoot, "config", "site.json"), "utf8"));

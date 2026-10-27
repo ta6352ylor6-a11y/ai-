@@ -4,6 +4,7 @@
 
 | 模板 | Preset | 站名 | 规模 |
 | --- | --- | --- | --- |
+| ai-nav | main-hub | ta6352ylor6-a11y AI 工具导航（主站，`--main` 发布到根目录） | 13 个分类、86 个工具，共 101 个页面 |
 | analysis | ai-briefing | ta6352ylor6-a11y AI 工具观察 | 4 个页面 |
 | analysis | performance-brief | ta6352ylor6-a11y 性能分析简报 | 4 个页面 |
 | lead | saas-compare | ta6352ylor6-a11y SaaS 方案比较 | 5 个页面 |
