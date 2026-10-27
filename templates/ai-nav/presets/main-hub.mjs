@@ -208,12 +208,15 @@ const categories = [
   }
 ];
 
+// The main site carries its own brand instead of the account-wide one in config/site.json.
+const MAIN_BRAND = "1bgp";
+
 const site = {
-  title: `${ctx.brand} AI 工具导航`,
+  title: `${MAIN_BRAND} AI 工具导航`,
   description: "精选国内外 AI 工具：AI 对话、AI 搜索、AI 写作、AI 绘画、AI 视频、AI 音频、AI 编程、AI 办公、AI 设计、智能体与开发平台，按场景分类，附使用建议。",
   baseUrl: ctx.baseUrl,
-  brand: `${ctx.brand}`,
-  brandShort: ctx.brandShort,
+  brand: MAIN_BRAND,
+  brandShort: MAIN_BRAND,
   tagline: "AI 工具导航",
   heroTitle: "发现好用的 AI 工具",
   heroSubtitle: "按使用场景整理国内外 AI 工具，每个工具都写清楚适合做什么、怎么选。",

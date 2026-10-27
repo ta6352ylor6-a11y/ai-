@@ -9,3 +9,4 @@
 | 日期 | Slug | 模板 | Preset | 链接 | 状态 |
 | --- | --- | --- | --- | --- | --- |
 | 2026-10-27 | (主站) | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/ | 待确认 |
+| 2026-10-27 | main-v02 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v02/ | 待确认 |
