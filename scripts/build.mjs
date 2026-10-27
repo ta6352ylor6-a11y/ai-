@@ -3,10 +3,11 @@
 //        node scripts/build.mjs --family ai-nav --preset main-hub --main              (main site at the Pages root)
 //        node scripts/build.mjs --family ai-nav --preset main-hub --main --version 2  (preview at main-v02/)
 import { execFileSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 import { checkSite } from "./check.mjs";
-import { MAIN_DIST, families, listPresets, loadSiteConfig, parseArgs, projectRoot, resolveSlug } from "./lib.mjs";
+import { MAIN_DIST, families, listPresets, loadSiteConfig, parseArgs, projectRoot, resolveSlug, walkFiles } from "./lib.mjs";
 
 const args = parseArgs(process.argv.slice(2));
 const site = loadSiteConfig();
@@ -39,6 +40,13 @@ execFileSync("node", [path.join(projectRoot, "templates", args.family, "build.mj
     SITE_LEAD_TARGET: site.leadTarget
   }
 });
+
+// Every page loads the shared root analytics.js (written by publish.mjs from config/site.json).
+const analyticsTag = `<script src="${new URL("analytics.js", site.pagesBase)}" defer></script>`;
+for (const file of walkFiles(outputDir).filter((f) => f.endsWith(".html"))) {
+  const html = readFileSync(file, "utf8");
+  if (!html.includes(analyticsTag)) writeFileSync(file, html.replace("</head>", `  ${analyticsTag}\n</head>`));
+}
 
 const problems = checkSite(outputDir, baseUrl);
 if (problems.length) {

@@ -88,6 +88,7 @@ ${renderMeta({
 })}
 </head>
 <body>
+  <div class="masthead">
   <header class="topbar">
     <div class="shell topbar-row">
       <a class="brand" href="${absoluteUrl()}">${escapeHtml(config.site.brand)}</a>
@@ -99,7 +100,6 @@ ${renderMeta({
       <a class="button ghost" href="${escapeHtml(config.site.primaryCta.href)}">${escapeHtml(config.site.primaryCta.label)}</a>
     </div>
   </header>
-  <main>
     <section class="hero shell">
       <div class="hero-copy">
         <p class="eyebrow">${escapeHtml(config.site.eyebrow)}</p>
@@ -117,13 +117,15 @@ ${renderMeta({
         </ul>
       </aside>
     </section>
+  </div>
+  <main>
     <section class="shell trust-row">
       ${config.site.trustPoints.map((item) => `<article>${escapeHtml(item)}</article>`).join("")}
     </section>
     <section class="shell offer-shell" id="offers">
       <div class="section-head">
-        <p class="eyebrow">lead pages</p>
-        <h2>按业务入口拆分的方案页</h2>
+        <p class="eyebrow">方案</p>
+        <h2>按业务场景选方案</h2>
       </div>
       <div class="offer-grid">
         ${config.offers.map(renderOfferCard).join("")}
@@ -131,8 +133,8 @@ ${renderMeta({
     </section>
     <section class="shell method-shell" id="method">
       <div class="section-head">
-        <p class="eyebrow">method</p>
-        <h2>先判断业务，再看方案，不靠堆词拼页面。</h2>
+        <p class="eyebrow">选型方法</p>
+        <h2>先判断业务，再看方案</h2>
       </div>
       <div class="method-grid">
         ${config.site.methodSteps.map((step, index) => `<article><span>${index + 1}</span><h3>${escapeHtml(step.title)}</h3><p>${escapeHtml(step.body)}</p></article>`).join("")}
@@ -140,14 +142,15 @@ ${renderMeta({
     </section>
     <section class="shell faq-shell" id="faq">
       <div class="section-head">
-        <p class="eyebrow">faq</p>
-        <h2>访问者最常问的问题</h2>
+        <p class="eyebrow">常见问题</p>
+        <h2>选购前常见问题</h2>
       </div>
       <div class="faq-grid">
         ${config.site.faqs.map((faq) => `<article><h3>${escapeHtml(faq.q)}</h3><p>${escapeHtml(faq.a)}</p></article>`).join("")}
       </div>
     </section>
   </main>
+${renderFooter()}
 </body>
 </html>`;
 }
@@ -192,6 +195,7 @@ ${renderMeta({
 })}
 </head>
 <body>
+  <div class="masthead">
   <header class="topbar">
     <div class="shell topbar-row">
       <a class="brand" href="${absoluteUrl()}">${escapeHtml(config.site.brand)}</a>
@@ -199,6 +203,7 @@ ${renderMeta({
       <a class="button ghost" href="${escapeHtml(offer.cta.href)}">${escapeHtml(offer.cta.label)}</a>
     </div>
   </header>
+  </div>
   <main class="shell offer-detail">
     <section class="detail-copy">
       <p class="eyebrow">${escapeHtml(offer.audience)}</p>
@@ -237,8 +242,18 @@ ${renderMeta({
       </div>
     </aside>
   </main>
+${renderFooter()}
 </body>
 </html>`;
+}
+
+// Links back to the main site at the domain root so every sub-site feeds the hub.
+function renderFooter() {
+  const home = new URL("/", config.site.baseUrl).toString();
+  return `  <footer class="footer shell">
+    <p><strong>${escapeHtml(config.site.title)}</strong> · 方案仅供选型参考，具体配置与价格以服务商页面为准。</p>
+    <p><a href="${home}">更多 AI 工具与专题 →</a></p>
+  </footer>`;
 }
 
 function renderRobots() {
@@ -267,11 +282,12 @@ function renderCss() {
 body {
   margin: 0;
   font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: linear-gradient(180deg, #0f172a 0, #0f172a 240px, var(--bg) 240px);
+  background: var(--bg);
   color: var(--ink);
 }
 a { color: inherit; text-decoration: none; }
 .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+.masthead { background: #0f172a; color: #fff; }
 .topbar { padding: 20px 0; color: #fff; }
 .topbar-row, nav, .button-row, .trust-row { display: flex; gap: 14px; align-items: center; }
 .topbar-row { justify-content: space-between; }
@@ -283,10 +299,11 @@ nav { color: rgba(255,255,255,0.78); flex-wrap: wrap; }
 }
 .button { background: var(--accent-2); color: #fff; }
 .button.ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-.hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr); gap: 24px; padding: 34px 0 24px; color: #fff; }
-.eyebrow { margin: 0 0 10px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #a5b4fc; font-weight: 800; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr); gap: 24px; align-items: start; padding: 34px 0 48px; color: #fff; }
+.eyebrow { margin: 0 0 10px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2); font-weight: 800; }
+.masthead .eyebrow { color: #a5b4fc; }
 h1, h2, h3 { margin: 0; line-height: 1.15; }
-h1 { font-size: clamp(36px, 6vw, 58px); max-width: 700px; }
+h1 { font-size: clamp(30px, 5vw, 50px); max-width: 700px; }
 .hero-text, .offer-summary, .faq-grid p, .content-block p, .signal-list, .hero-panel li { color: var(--muted); line-height: 1.8; }
 .hero .hero-text { color: rgba(255,255,255,0.78); }
 .hero-panel, .offer-card, .method-grid article, .faq-grid article, .sidebar-card, .content-block, .compare-grid article, .trust-row article {
@@ -297,7 +314,7 @@ h1 { font-size: clamp(36px, 6vw, 58px); max-width: 700px; }
 }
 .hero-panel { padding: 24px; color: var(--ink); }
 .hero-panel ul, .signal-list { padding-left: 18px; margin: 0; }
-.trust-row { flex-wrap: wrap; padding-bottom: 18px; }
+.trust-row { flex-wrap: wrap; padding: 24px 0 18px; }
 .trust-row article { flex: 1 1 180px; padding: 18px 20px; }
 .offer-shell, .method-shell, .faq-shell { padding: 24px 0; }
 .section-head { display: grid; gap: 8px; margin-bottom: 18px; }
@@ -313,9 +330,14 @@ h1 { font-size: clamp(36px, 6vw, 58px); max-width: 700px; }
 .compare-grid article { padding: 18px; display: grid; gap: 10px; }
 .content-block { display: grid; gap: 12px; }
 .offer-sidebar { display: grid; gap: 16px; align-content: start; position: sticky; top: 16px; height: fit-content; }
+.footer { padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+.footer p { margin: 6px 0; }
+.footer a { color: var(--accent-2); font-weight: 700; }
 @media (max-width: 900px) {
   .hero, .offer-grid, .method-grid, .faq-grid, .offer-detail, .compare-grid { grid-template-columns: 1fr; }
   .topbar-row, nav, .button-row, .trust-row { flex-direction: column; align-items: stretch; }
+  .trust-row article { flex: none; }
+  .topbar nav { flex-direction: row; gap: 18px; }
 }
 `;
 }

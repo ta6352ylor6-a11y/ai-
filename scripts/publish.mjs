@@ -7,6 +7,7 @@ import { appendFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSyn
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 
+import { renderAnalyticsJs } from "./analytics.mjs";
 import { MAIN_DIST, loadSiteConfig, parseArgs, projectRoot } from "./lib.mjs";
 
 const OWNED_LIST = ".main-files.json";
@@ -62,6 +63,7 @@ if (isMainRoot) {
 if (!existsSync(path.join(cloneDir, ".nojekyll"))) writeFileSync(path.join(cloneDir, ".nojekyll"), "");
 // GitHub Pages reads the custom domain from a root CNAME file.
 if (site.customDomain) writeFileSync(path.join(cloneDir, "CNAME"), `${site.customDomain}\n`);
+writeFileSync(path.join(cloneDir, "analytics.js"), renderAnalyticsJs(site));
 writeRootIndexes();
 
 git(cloneDir, "add", "-A");

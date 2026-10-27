@@ -2,9 +2,18 @@
   "owner": "ta6352ylor6-a11y",
   "publishRepo": "ta6352ylor6-a11y/ta6352ylor6-a11y.github.io",
   "pagesBase": "https://ai.gotidc.com/",
-  "slugPrefix": "ta6352ylor6-a11y",
-  "brand": "ta6352ylor6-a11y",
-  "brandShort": "ta6352",
+  "slugPrefix": "",
+  "brand": "1bgp",
+  "brandShort": "1bgp",
   "leadTarget": "https://www.1bgp.com/",
-  "customDomain": "ai.gotidc.com"
+  "customDomain": "ai.gotidc.com",
+  "analytics": {
+    "_note": "填入统计 ID 后重新发布任意一个站即可全站生效（只会更新根目录 analytics.js）",
+    "baidu": "",
+    "ga4": "",
+    "umami": {
+      "src": "",
+      "websiteId": ""
+    }
+  }
 }
