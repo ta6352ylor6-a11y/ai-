@@ -10,6 +10,7 @@ ai导航站：手动驱动的静态站生成与发布工厂。一条命令只生
 - `scripts/build.mjs`：构建一个站到 `dist/<slug>/`，构建后自动检查
 - `scripts/check.mjs`：检查 canonical、og:url、sitemap、robots 都指向当前发布地址，且没有其他账号的链接
 - `scripts/publish.mjs`：把一个站发布到 Pages 仓库的子目录，不覆盖已有目录，并写入 `SITE-LINK-REGISTRY.md`
+- `scripts/indexnow.mjs`：把已发布站点的网址提交到 IndexNow（Bing 等）；publish.mjs 发布后会自动提交该站，`node scripts/indexnow.mjs` 可手动提交全部
 - `docs/TEMPLATES.md`：模板与 preset 清单
 - `docs/REFERENCES.md`：导航站设计参考
 

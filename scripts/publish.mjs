@@ -10,6 +10,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 
 import { renderAnalyticsJs } from "./analytics.mjs";
+import { sitemapUrls, submitIndexNow } from "./indexnow.mjs";
 import { MAIN_DIST, loadSiteConfig, parseArgs, projectRoot } from "./lib.mjs";
 
 const OWNED_LIST = ".main-files.json";
@@ -69,6 +70,7 @@ if (!existsSync(path.join(cloneDir, ".nojekyll"))) writeFileSync(path.join(clone
 // GitHub Pages reads the custom domain from a root CNAME file.
 if (site.customDomain) writeFileSync(path.join(cloneDir, "CNAME"), `${site.customDomain}\n`);
 writeFileSync(path.join(cloneDir, "analytics.js"), renderAnalyticsJs(site));
+if (site.indexNowKey) writeFileSync(path.join(cloneDir, `${site.indexNowKey}.txt`), site.indexNowKey);
 writeRootIndexes();
 
 git(cloneDir, "add", "-A");
@@ -88,6 +90,24 @@ if (isMainRoot || args["rebase-domain"] || !readFileSync(registry, "utf8").inclu
 }
 
 console.log(url);
+
+// Tell IndexNow once GitHub Pages is actually serving the new sitemap.
+if (site.indexNowKey) {
+  const sitemap = new URL("sitemap.xml", url).toString();
+  let urls = [];
+  for (let attempt = 0; attempt < 18 && !urls.length; attempt += 1) {
+    try {
+      urls = await sitemapUrls(sitemap);
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 10000));
+    }
+  }
+  if (urls.length) {
+    console.error(`IndexNow: submitted ${urls.length} URLs, HTTP ${await submitIndexNow(site, urls)}`);
+  } else {
+    console.error(`IndexNow: ${sitemap} not live yet; run node scripts/indexnow.mjs ${sitemap} later.`);
+  }
+}
 
 // sites.json feeds the main page's sub-site list; robots.txt is only read at the root,
 // so it has to point crawlers at every published sitemap.
