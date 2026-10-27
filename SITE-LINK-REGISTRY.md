@@ -12,4 +12,4 @@
 | 2026-10-27 | main-v02 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v02/ | 已确认，已发布到主站 |
 | 2026-10-27 | (主站) | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/ | 已迁到新域名 |
 | 2026-10-27 | main-v03 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v03/ | 已随换域名发布到主站 |
-| 2026-10-27 | (主站) | ai-nav | main-hub | https://ai.gotidc.com/ | 待确认 |
+| 2026-10-27 | (主站) | ai-nav | main-hub | https://ai.gotidc.com/ | 已确认 |
