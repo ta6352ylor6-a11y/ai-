@@ -8,5 +8,7 @@
 
 | 日期 | Slug | 模板 | Preset | 链接 | 状态 |
 | --- | --- | --- | --- | --- | --- |
-| 2026-10-27 | (主站) | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/ | 待确认 |
-| 2026-10-27 | main-v02 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v02/ | 待确认 |
+| 2026-10-27 | (主站) | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/ | 已被新版替换 |
+| 2026-10-27 | main-v02 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v02/ | 已确认，已发布到主站 |
+| 2026-10-27 | (主站) | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/ | 已确认 |
+| 2026-10-27 | main-v03 | ai-nav | main-hub | https://ta6352ylor6-a11y.github.io/main-v03/ | 待确认 |

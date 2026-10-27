@@ -100,9 +100,11 @@ ${renderHeader()}
 <div class="shell">
 ${renderSidebar()}
   <main class="main" id="main">
+${site.rail ? renderRail("rail-inline") : ""}
 ${body}
 ${renderFooter()}
   </main>
+${site.rail ? `  <aside class="rail" aria-label="推荐">\n${renderRail("rail-card")}\n  </aside>` : ""}
 </div>
 <script src="${absoluteUrl("assets/app.js")}" defer></script>
 </body>
@@ -121,6 +123,17 @@ function renderHeader() {
     <input type="search" name="q" placeholder="搜索 AI 工具，如：PPT、配音、编程" aria-label="搜索 AI 工具" data-search-input>
   </form>
 </header>`;
+}
+
+// Wide screens show the lead card in a sticky right column; narrower screens get a compact banner above the content.
+function renderRail(variant) {
+  const { rail } = site;
+  return `    <div class="${variant}">
+      <p class="rail-eyebrow">${escapeHtml(rail.eyebrow)}</p>
+      <p class="rail-title">${escapeHtml(rail.title)}</p>
+      <ul class="rail-points">${rail.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul>
+      <a class="rail-cta" href="${escapeHtml(rail.href)}" target="_blank" rel="noopener">${escapeHtml(rail.label)} →</a>
+    </div>`;
 }
 
 function renderSidebar() {
@@ -501,6 +514,17 @@ a { color: inherit; text-decoration: none; }
 .promo-body { margin: 0 0 10px; font-size: 13px; color: var(--muted); }
 .promo-link { font-size: 13px; font-weight: 600; color: var(--accent); }
 .scrim { display: none; }
+.rail { width: 272px; flex-shrink: 0; padding: 24px 20px 24px 0; }
+.rail-card { position: sticky; top: calc(var(--top) + 24px); }
+.rail-card, .rail-inline { padding: 22px 20px; border-radius: 16px; color: #fff; background: linear-gradient(150deg, #ff6a3d, #e8384f 55%, #b8236b); box-shadow: 0 10px 30px rgba(232, 56, 79, .28); }
+.rail-eyebrow { display: inline-block; margin: 0 0 10px; padding: 2px 10px; border-radius: 999px; background: rgba(255, 255, 255, .22); font-size: 12px; font-weight: 600; }
+.rail-title { margin: 0 0 12px; font-size: 20px; font-weight: 800; line-height: 1.35; }
+.rail-points { margin: 0 0 18px; padding: 0; list-style: none; font-size: 14px; }
+.rail-points li { padding: 4px 0 4px 22px; position: relative; }
+.rail-points li::before { content: "✓"; position: absolute; left: 0; font-weight: 700; }
+.rail-cta { display: block; text-align: center; padding: 11px 0; border-radius: 999px; background: #fff; color: #d6304a; font-weight: 700; }
+.rail-cta:hover { opacity: .92; }
+.rail-inline { display: none; margin-bottom: 18px; }
 .main { flex: 1; min-width: 0; padding: 24px 28px 40px; max-width: 1280px; }
 .hero { text-align: center; padding: 36px 16px 28px; margin-bottom: 8px; border-radius: 18px; background: linear-gradient(135deg, var(--accent-soft), var(--panel)); border: 1px solid var(--line); }
 .hero h1 { margin: 0 0 8px; font-size: 32px; }
@@ -558,6 +582,14 @@ a { color: inherit; text-decoration: none; }
 .faq p { margin: 8px 0 0; color: var(--muted); }
 .footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 .footer p { margin: 4px 0; }
+@media (max-width: 1199px) {
+  .rail { display: none; }
+  .rail-inline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; padding: 16px 20px; }
+  .rail-inline .rail-eyebrow { margin: 0; }
+  .rail-inline .rail-title { margin: 0; font-size: 17px; flex: 1; min-width: 200px; }
+  .rail-inline .rail-points { display: none; }
+  .rail-inline .rail-cta { padding: 8px 22px; }
+}
 @media (max-width: 900px) {
   .menu-btn { display: block; }
   .logo { width: auto; }

@@ -227,6 +227,13 @@ const site = {
     label: "查看服务器方案",
     href: ctx.leadTarget
   },
+  rail: {
+    eyebrow: "站长推荐",
+    title: "1bgp 服务器：AI 应用与网站一站部署",
+    points: ["香港 / 海外服务器", "CN2 优化线路", "Windows / Linux VPS", "智能体、API 代理、建站部署"],
+    label: "查看 1bgp 方案",
+    href: ctx.leadTarget
+  },
   updated: "2026-10"
 };
 
