@@ -1,8 +1,8 @@
-# 财务系统：Paymenter（三套方案共用）
+# 财务系统：Paymenter
 
 ## 它是什么
 
-Paymenter 是开源的财务和销售系统，用来替代 WHMCS 或魔方财务。客户在这里注册、充值、下单、续费，管理员在后台管理商品、订单和客户。它本身不管虚拟机，而是通过"扩展"去调用 VPS 面板（Virtualizor、Convoy 等）自动开通。
+Paymenter 是开源的财务和销售系统，用来替代 WHMCS 或魔方财务。方案 A（Virtualizor）直接用它；方案 B（OpenNebula）、方案 C（CloudStack）也可以用，但要自己开发对接扩展，这两个方案的其他财务选择见各自文档。客户在这里注册、充值、下单、续费，管理员在后台管理商品、订单和客户。它本身不管虚拟机，而是通过"扩展"去调用 VPS 面板（Virtualizor、Convoy 等）自动开通。
 
 - 官网：https://paymenter.org
 - 官方安装文档：https://paymenter.org/docs/installation/install
@@ -143,7 +143,7 @@ sudo systemctl enable --now redis-server
 
 ## 连接 VPS 面板
 
-各方案文档里会写具体做法。Paymenter 自带的服务器扩展有：Virtualizor、Convoy、VirtFusion，以及 cPanel、DirectAdmin、Plesk、Enhance、Pterodactyl。直连 Proxmox 的扩展是付费的，没有 CloudStack 扩展。
+各方案文档里会写具体做法。Paymenter 自带的服务器扩展有：Virtualizor、Convoy、VirtFusion，以及 cPanel、DirectAdmin、Plesk、Enhance、Pterodactyl。直连 Proxmox 的扩展是付费的；没有 OpenNebula 和 CloudStack 扩展。
 
 ## USDT 充值（需要开发）
 

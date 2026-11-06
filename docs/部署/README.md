@@ -1,33 +1,40 @@
 # VPS 平台部署文档
 
-这里有三套方案的部署文档，加上一份三套共用的财务系统文档。人可以照着做，也可以把文档整份交给 AI（Claude Code）让它照着执行。
+这里有三套方案的部署文档，加上一份财务系统 Paymenter 的部署文档。人可以照着做，也可以把文档整份交给 AI（Claude Code）让它照着执行。
 
 ## 文档列表
 
-1. `00-财务系统-Paymenter.md`：三套方案共用的财务系统（注册、充值、下单、续费）
+1. `00-财务系统-Paymenter.md`：开源财务系统 Paymenter（注册、充值、下单、续费）。方案 A 直接用它；方案 B、C 也可以用，但要自己开发对接
 2. `01-方案A-Virtualizor.md`：Virtualizor 面板，最快、最省事，按母鸡付授权费
-3. `02-方案B-PVE-Convoy.md`：Proxmox VE + Convoy 面板，体验接近 Virtualizor
-4. `03-方案C-CloudStack.md`：Apache CloudStack，完全开源免费，最复杂
+3. `02-方案B-OpenNebula.md`：OpenNebula 云平台，社区版开源免费，架构比 CloudStack 简单
+4. `03-方案C-CloudStack.md`：Apache CloudStack，完全开源免费，功能最强、最复杂
 
 ## 三套方案一句话对比
 
-- 方案 A（Virtualizor）：商业软件。主控 $1/月，每台母鸡 $9/月。流量限速等功能自带，Paymenter 自带对接，开发量最小。
-- 方案 B（PVE + Convoy）：PVE 开源免费。Convoy 是"源码公开但不是开源"，免费版只能用于非商业测试，卖 VPS 要买企业授权，每台母鸡 $6/月。Paymenter 自带 Convoy 对接。
-- 方案 C（CloudStack）：完全开源（Apache 2.0），零授权费。但 Paymenter 没有现成对接，流量额度和超额限速也要自己开发。
+- 方案 A（Virtualizor）：商业软件。主控 $1/月，每台母鸡 $9/月。流量限速等功能自带；财务用 Paymenter，自带对接，开发量最小。
+- 方案 B（OpenNebula）：社区版开源免费（企业版要订阅）。财务系统现成对接最好的是 HostBill（商业，一次性买断）；官方 WHMCS 模块只给企业版；用 Paymenter 等开源财务系统要自己开发对接。
+- 方案 C（CloudStack）：完全开源，零授权费。自带 Quota 计费插件（按资源定价、充值额度、自动扣费、欠费锁定），可以只做一个轻量客户门户（注册加 USDT 充值）就开卖；也可以用 HostBill、StackBill 等商业产品，或 Paymenter 加自研扩展。
 
-价格是 2026 年 11 月从各官网查到的，以官网最新为准。
+价格和功能是 2026 年 11 月从各官网和网上资料查到的，以官网最新为准。
+
+## 各方案常用的财务系统（调研结果）
+
+- Virtualizor：Paymenter（自带对接，免费）、WHMCS、HostBill、Blesta 等几乎都有现成模块
+- OpenNebula：HostBill（2025 年 9 月起有官方模块，支持 VPS 和按量计费，包括流量）；WHMCS（官方模块，仅企业版）
+- CloudStack：自带 Quota 计费插件；HostBill（官方模块）；WHMCS（第三方模块）；StackBill（专门的 CloudStack 门户，有限量免费版）
+- Paymenter、FOSSBilling、Blesta 等开源财务系统：都没找到 OpenNebula 或 CloudStack 的现成对接
+
+HostBill 是一次性买断授权，网上资料显示约 $599 起，之后每年约 $125 更新费，部分模块另收费，官方不公开价格，需要询价。
 
 ## 重要更正
 
-之前聊天里说"Convoy 是开源的（MIT）"是错的。Convoy 官网明确写了：源码公开（source-available），不是开源；商业使用（卖 VPS）需要企业授权，每台母鸡 $6/月。另外 Paymenter 直连 Proxmox 的扩展也是付费的（在 BuiltByBit 购买）。所以"完全不花授权费"的方案只有方案 C，或者 PVE 加自己开发的对接模块。
+之前聊天里说"Convoy 是开源的（MIT）"是错的：Convoy 是源码公开但不是开源，卖 VPS 要买企业授权（每台母鸡 $6/月）。方案 B 已改为 OpenNebula，不再使用 Convoy。
 
 ## 推荐顺序
 
-1. 先装财务系统（00），三套共用
-2. 先测方案 A：最快看到完整业务流程
-3. 再测方案 B：看体验和成本是否更合适
-4. 前两套都不满意，或者想做"云平台"，再测方案 C
-5. 选定一套用于正式运营，其他测试环境删掉
+1. 先测方案 A：最快看到完整业务流程（Virtualizor + Paymenter）
+2. 再测方案 B 或 C：看零授权费的方案能否达到同样效果，以及要开发多少
+3. 选定一套用于正式运营，其他测试环境删掉
 
 ## 通用约定（所有文档都适用）
 
@@ -47,3 +54,17 @@
 ```
 
 推荐模型：Opus 5.5。
+
+## 资料来源
+
+- Virtualizor 价格：https://www.virtualizor.com/pricing
+- Paymenter 文档：https://paymenter.org/docs/installation/install
+- Convoy 授权说明：https://convoypanel.com/docs/project/licensing
+- OpenNebula 计费集成：https://docs.opennebula.io/7.0/integrations/
+- OpenNebula 与 HostBill：https://opennebula.io/blog/experiences/opennebula-meets-hostbill/
+- OpenNebula 社区版说明：https://docs.opennebula.io/6.2/intro_release_notes/release_notes_community/what_is.html
+- HostBill OpenNebula 模块：https://hostbillapp.com/feature/opennebula/
+- HostBill CloudStack 模块：https://hostbillapp.com/feature/cloudstack-overview/
+- CloudStack Quota 插件：https://docs.cloudstack.apache.org/en/latest/plugins/quota.html
+- StackBill：https://www.stackbill.com/stackbill-overview.html
+- StratoSTACK：https://github.com/obaviet/stratostack
